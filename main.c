@@ -6,16 +6,16 @@
 /*   By: wzafati <wzafati@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/16 20:13:31 by wzafati           #+#    #+#             */
-/*   Updated: 2016/07/17 00:18:17 by wzafati          ###   ########.fr       */
+/*   Updated: 2016/07/17 17:09:50 by wzafati          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include			"ft_utils.h"
-#include			"ft_sudoku.h"
+#include "ft_utils.h"
+#include "ft_sudoku.h"
 
 int					main(int ac, char **av)
 {
-	int 			grille[9][9];
+	int				grille[9][9];
 
 	if (ac != 10 || !ft_args_lencheck(av, 9))
 	{

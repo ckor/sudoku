@@ -6,13 +6,13 @@
 /*   By: wzafati <wzafati@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/16 20:13:31 by wzafati           #+#    #+#             */
-/*   Updated: 2016/07/17 00:18:17 by wzafati          ###   ########.fr       */
+/*   Updated: 2016/07/17 18:23:36 by wzafati          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include			"ft_sudoku.h"
+#include "ft_sudoku.h"
 
-void				ft_sudoku_init_grid(char **stab, int grille[9][9])
+void		ft_sudoku_init_grid(char **stab, int grille[9][9])
 {
 	int				i;
 	int				j;
@@ -20,7 +20,6 @@ void				ft_sudoku_init_grid(char **stab, int grille[9][9])
 	i = 1;
 	while (i <= 9)
 	{
-		grille = grille;
 		j = 0;
 		while (j < 9 && stab[i][j])
 		{
@@ -34,72 +33,75 @@ void				ft_sudoku_init_grid(char **stab, int grille[9][9])
 	}
 }
 
-bool		ft_sudoku_check_line(int grille[9][9], int position)
+t_bool		ft_sudoku_check_line(int grille[9][9], int position)
 {
-	bool	check[10] = {false};
+	t_bool	check[10];
 	int		i;
 	int		j;
 
 	i = (position / 9);
 	j = 0;
+	ft_init_tab(check);
 	while (j < 9)
 	{
 		if (grille[i][j] < 0 || grille[i][j] > 9 || (check[grille[i][j]]))
-			return (false);
+			return (FALSE);
 		if (grille[i][j] != 0)
-			check[grille[i][j]] = true;
+			check[grille[i][j]] = TRUE;
 		j++;
 	}
-	return (true);
+	return (TRUE);
 }
 
-bool		ft_sudoku_check_column(int grille[9][9], int position)
+t_bool		ft_sudoku_check_column(int grille[9][9], int position)
 {
-	bool	check[10] = {false};
+	t_bool	check[10];
 	int		i;
 	int		j;
 
 	i = 0;
 	j = (position % 9);
+	ft_init_tab(check);
 	while (i < 9)
 	{
 		if (grille[i][j] < 0 || grille[i][j] > 9 || (check[grille[i][j]]))
-			return (false);
+			return (FALSE);
 		if (grille[i][j] != 0)
-			check[grille[i][j]] = true;
+			check[grille[i][j]] = TRUE;
 		i++;
 	}
-	return (true);
+	return (TRUE);
 }
 
-bool		ft_sudoku_check_block(int grille[9][9], int position)
+t_bool		ft_sudoku_check_block(int grille[9][9], int position)
 {
-	bool	check[10] = {false};
+	t_bool	check[10];
 	int		i;
 	int		j;
-	int		_i;
-	int		_j;
+	int		min_i;
+	int		min_j;
 
-	_i = ((position / 9) - ((position / 9) % 3));
-	_j = ((position % 9) - ((position % 9) % 3));
-	i = _i;
-	while (i < (_i + 3))
+	ft_init_tab(check);
+	min_i = ((position / 9) - ((position / 9) % 3));
+	min_j = ((position % 9) - ((position % 9) % 3));
+	i = min_i;
+	while (i < (min_i + 3))
 	{
-		j = _j;
-		while (j < (_j + 3))
+		j = min_j;
+		while (j < (min_j + 3))
 		{
 			if (grille[i][j] < 0 || grille[i][j] > 9 || (check[grille[i][j]]))
-				return (false);
+				return (FALSE);
 			if (grille[i][j] != 0)
-				check[grille[i][j]] = true;
+				check[grille[i][j]] = TRUE;
 			j++;
 		}
 		i++;
 	}
-	return (true);
+	return (TRUE);
 }
 
-bool		ft_sudoku_grid_is_valid(int grille[9][9])
+t_bool		ft_sudoku_grid_is_valid(int grille[9][9])
 {
 	int		position;
 
@@ -110,9 +112,9 @@ bool		ft_sudoku_grid_is_valid(int grille[9][9])
 			!ft_sudoku_check_column(grille, position) ||
 			!ft_sudoku_check_block(grille, position))
 		{
-			return (false);
+			return (FALSE);
 		}
 		position++;
 	}
-	return (true);
+	return (TRUE);
 }

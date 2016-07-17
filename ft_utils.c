@@ -6,11 +6,11 @@
 /*   By: wzafati <wzafati@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/16 20:13:31 by wzafati           #+#    #+#             */
-/*   Updated: 2016/07/17 00:18:17 by wzafati          ###   ########.fr       */
+/*   Updated: 2016/07/17 18:22:06 by wzafati          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include			"ft_utils.h"
+#include "ft_utils.h"
 
 int					ft_strlen(char *str)
 {
@@ -35,20 +35,19 @@ void				ft_putstr(char *str)
 	write(1, str, len);
 }
 
-void				ft_putnbr(int nbr)
+void				ft_init_tab(int tab[10])
 {
-	if (nbr < 0 && (nbr = -(nbr)))
-		ft_putchar('-');
-	if (nbr <= 9)
-		ft_putchar('0' + nbr);
-	else
+	int				i;
+
+	i = 0;
+	while (i < 10)
 	{
-		ft_putnbr(nbr / 10);
-		ft_putnbr(nbr % 10);
+		tab[i] = FALSE;
+		i++;
 	}
 }
 
-bool				ft_args_lencheck(char **av, int len)
+t_bool				ft_args_lencheck(char **av, int len)
 {
 	int				i;
 
@@ -56,8 +55,8 @@ bool				ft_args_lencheck(char **av, int len)
 	while (av && av[i])
 	{
 		if (ft_strlen(av[i]) != len)
-			return (false);
+			return (FALSE);
 		i++;
 	}
-	return (av == NULL) ? (false) : (true);
+	return (av == NULL) ? (FALSE) : (TRUE);
 }

@@ -6,13 +6,13 @@
 /*   By: wzafati <wzafati@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/07/16 20:13:31 by wzafati           #+#    #+#             */
-/*   Updated: 2016/07/17 00:18:17 by wzafati          ###   ########.fr       */
+/*   Updated: 2016/07/17 17:43:37 by wzafati          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include			"ft_sudoku.h"
+#include "ft_sudoku.h"
 
-bool		ft_sudoku_try_line(int k, int grille[9][9], int i)
+t_bool		ft_sudoku_try_line(int k, int grille[9][9], int i)
 {
 	int				j;
 
@@ -20,13 +20,13 @@ bool		ft_sudoku_try_line(int k, int grille[9][9], int i)
 	while (j < 9)
 	{
 		if (grille[i][j] == k)
-			return (false);
+			return (FALSE);
 		j++;
 	}
-	return (true);
+	return (TRUE);
 }
 
-bool		ft_sudoku_try_column(int k, int grille[9][9], int j)
+t_bool		ft_sudoku_try_column(int k, int grille[9][9], int j)
 {
 	int				i;
 
@@ -34,35 +34,35 @@ bool		ft_sudoku_try_column(int k, int grille[9][9], int j)
 	while (i < 9)
 	{
 		if (grille[i][j] == k)
-			return (false);
+			return (FALSE);
 		i++;
 	}
-	return (true);
+	return (TRUE);
 }
 
-bool		ft_sudoku_try_block(int k, int grille[9][9], int i, int j)
+t_bool		ft_sudoku_try_block(int k, int grille[9][9], int i, int j)
 {
-	int				_i;
-	int				_j;
+	int				min_i;
+	int				min_j;
 
-	_i = (i - (i % 3));
-	_j = (j - (j % 3));
-	i = _i;
-	while (i < (_i + 3))
+	min_i = (i - (i % 3));
+	min_j = (j - (j % 3));
+	i = min_i;
+	while (i < (min_i + 3))
 	{
-		j = _j;
-		while (j < (_j + 3))
+		j = min_j;
+		while (j < (min_j + 3))
 		{
 			if (grille[i][j] == k)
-				return (false);
+				return (FALSE);
 			j++;
 		}
 		i++;
 	}
-	return (true);
+	return (TRUE);
 }
 
-bool		ft_sudoku_resolve(int grille[9][9], int position)
+t_bool		ft_sudoku_resolve(int grille[9][9], int position)
 {
 	int				k;
 	int				i;
@@ -72,7 +72,7 @@ bool		ft_sudoku_resolve(int grille[9][9], int position)
 	i = (position / 9);
 	j = (position % 9);
 	if (position == 81)
-		return (true);
+		return (TRUE);
 	if (grille[i][j] != 0)
 		return (ft_sudoku_resolve(grille, (position + 1)));
 	while (k <= 9)
@@ -82,13 +82,13 @@ bool		ft_sudoku_resolve(int grille[9][9], int position)
 			ft_sudoku_try_block(k, grille, i, j))
 		{
 			grille[i][j] = k;
-			if (ft_sudoku_resolve(grille, (position + 1)) )
-				return (true);
+			if (ft_sudoku_resolve(grille, (position + 1)))
+				return (TRUE);
 		}
 		k++;
 	}
 	grille[i][j] = 0;
-	return (false);
+	return (FALSE);
 }
 
 void		ft_sudoku_show_grid(int grille[9][9])
