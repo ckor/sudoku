@@ -36,7 +36,7 @@ void				ft_sudoku_init_grid(char **stab, int grille[9][9])
 
 bool		ft_sudoku_check_line(int grille[9][9], int position)
 {
-	bool	check[9] = {false};
+	bool	check[10] = {false};
 	int		i;
 	int		j;
 
@@ -55,7 +55,7 @@ bool		ft_sudoku_check_line(int grille[9][9], int position)
 
 bool		ft_sudoku_check_column(int grille[9][9], int position)
 {
-	bool	check[9] = {false};
+	bool	check[10] = {false};
 	int		i;
 	int		j;
 
@@ -74,7 +74,7 @@ bool		ft_sudoku_check_column(int grille[9][9], int position)
 
 bool		ft_sudoku_check_block(int grille[9][9], int position)
 {
-	bool	check[9] = {false};
+	bool	check[10] = {false};
 	int		i;
 	int		j;
 	int		_i;
